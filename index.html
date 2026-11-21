@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>200만원 PC 견적</title>
+<meta name="description" content="3D 작업·게임용 200만원 PC 견적과 부품별 구매 링크">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F1EC; --panel:#FFFFFF; --ink:#15191E; --soft:#5B6470; --line:#E1DDD3;
+  --accent:#1F6FEB; --accent-ink:#FFFFFF; --ok:#1F7F52; --warn:#B4531A; --chip:#ECE9E1;
+  --bar:#DCD8CE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101317; --panel:#181C22; --ink:#ECEFF3; --soft:#9AA4B0; --line:#2A3038;
+    --accent:#4C8DFF; --accent-ink:#0B0E12; --ok:#4CC38A; --warn:#F0965A; --chip:#232830; --bar:#2A3038;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101317; --panel:#181C22; --ink:#ECEFF3; --soft:#9AA4B0; --line:#2A3038;
+  --accent:#4C8DFF; --accent-ink:#0B0E12; --ok:#4CC38A; --warn:#F0965A; --chip:#232830; --bar:#2A3038;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding:28px 16px 64px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
+h1{font-family:'IBM Plex Sans KR',sans-serif;font-size:30px;margin:0;letter-spacing:-.5px}
+.sub{color:var(--soft);margin:4px 0 0;font-size:14px}
+.theme{background:var(--chip);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit;font-size:13px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
+.preset{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer;font:inherit;font-size:14px}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.preset-note{color:var(--soft);font-size:14px;margin:-6px 0 18px}
+.summary{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 14px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.sumrow{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
+.total{font-family:'IBM Plex Sans KR',sans-serif;font-size:28px;font-weight:700}
+.diff{font-size:14px;font-weight:700}
+.diff.ok{color:var(--ok)} .diff.over{color:var(--warn)}
+.meter{height:8px;background:var(--bar);border-radius:6px;overflow:hidden;margin-top:8px}
+.meter>i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.meter.over>i{background:var(--warn)}
+.list{display:flex;flex-direction:column;gap:10px}
+.part{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;grid-template-columns:26px 1fr auto;gap:4px 12px;align-items:start}
+.part>*{min-width:0}
+.part.done{opacity:.6}
+.why,.preset-note,.sub{overflow-wrap:anywhere}
+.part input[type=checkbox]{width:18px;height:18px;margin-top:4px;accent-color:var(--ok)}
+.cat{font-size:12px;font-weight:700;color:var(--soft);letter-spacing:.5px}
+.name{font-weight:700;font-size:16px}
+.why{color:var(--soft);font-size:13px;margin-top:2px}
+.price{display:flex;align-items:center;gap:4px;justify-self:end}
+.price input{width:110px;text-align:right;font:inherit;font-weight:700;font-size:16px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--bg);color:var(--ink)}
+.price span{font-size:13px;color:var(--soft)}
+.links{grid-column:2 / 4;display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.links a{font-size:13px;text-decoration:none;color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.btn{font:inherit;font-size:14px;border-radius:10px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+.note{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;color:var(--soft);font-size:14px}
+.note b{color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+@media (max-width:560px){
+  h1{font-size:24px}
+  .part{grid-template-columns:22px 1fr}
+  .price{grid-column:2;justify-self:start;margin-top:6px}
+  .links{grid-column:2}
+  .total{font-size:24px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>200만원 PC 견적</h1>
+      <p class="sub">3D 작업(3ds Max·Blender)과 게임을 모두 쾌적하게 · 2026년 11월 기준 예상가</p>
+    </div>
+    <button class="theme" id="theme" type="button">테마 전환</button>
+  </header>
+
+  <div class="presets" role="group" aria-label="구성 선택">
+    <button class="preset" data-p="balanced" type="button">균형 (추천)</button>
+    <button class="preset" data-p="three" type="button">3D 작업 위주</button>
+    <button class="preset" data-p="game" type="button">게임 위주</button>
+  </div>
+  <p class="preset-note" id="presetNote"></p>
+
+  <div class="summary">
+    <div class="sumrow">
+      <div><span class="cat">예상 합계</span><div class="total" id="total">0원</div></div>
+      <div class="diff" id="diff"></div>
+    </div>
+    <div class="meter" id="meter"><i></i></div>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="actions">
+    <button class="btn primary" id="copy" type="button">견적 복사</button>
+    <button class="btn" id="reset" type="button">가격 초기화</button>
+  </div>
+
+  <div class="note">
+    <b>가격은 예상가예요.</b> 메모리·SSD는 최근 가격 변동이 커서 실제 가격과 다를 수 있어요. 각 부품의 <b>다나와</b> 버튼으로 최저가를 확인한 뒤 가격 칸을 고치면 합계가 바로 바뀝니다. 체크박스는 구매 완료 표시이며 이 브라우저에만 저장돼요.
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const BUDGET = 2000000;
+const PRESETS = {
+  balanced: {
+    note: "RTX 5070 + 라이젠 7 · 3D 뷰포트, GPU 렌더, 게임 모두 가장 효율적인 구성",
+    parts: [
+      ["CPU", "AMD 라이젠 7 9700X", 390000, "단일 코어가 강해 Max·Blender 뷰포트가 빠르고 8코어로 렌더도 충분", "라이젠7 9700X"],
+      ["쿨러", "듀얼타워 공랭 (PA120 급)", 40000, "조용하고 9700X에 넉넉한 냉각", "써멀라이트 PA120"],
+      ["메인보드", "B650 ATX (Wi-Fi)", 170000, "안정적인 AM5 보드, 이후 CPU 업그레이드 가능", "B650 ATX WiFi"],
+      ["메모리", "DDR5 32GB (16GB×2) 6000", 180000, "작업과 게임에 충분한 기본 용량", "DDR5 32GB 6000 16GBx2"],
+      ["그래픽카드", "RTX 5070 12GB", 870000, "이 가격대 3D·게임 성능 효율 최고", "RTX 5070"],
+      ["SSD", "NVMe Gen4 2TB", 160000, "120MB짜리 모델링 파일이 많아 2TB 권장", "NVMe Gen4 2TB SSD"],
+      ["파워", "750W 80+ 골드", 100000, "5070에 여유 있는 용량", "750W 80PLUS 골드 파워"],
+      ["케이스", "공기 흐름 좋은 미들타워", 70000, "앞면 메쉬형 추천", "미들타워 메쉬 케이스"]
+    ]
+  },
+  three: {
+    note: "VRAM 16GB + 메모리 64GB · 무거운 씬, Arnold/Cycles GPU 렌더, 시뮬레이션에 유리",
+    parts: [
+      ["CPU", "AMD 라이젠 7 9700X", 390000, "뷰포트와 렌더 모두 균형", "라이젠7 9700X"],
+      ["쿨러", "듀얼타워 공랭 (PA120 급)", 40000, "장시간 렌더에도 조용함", "써멀라이트 PA120"],
+      ["메인보드", "B650 ATX (Wi-Fi)", 170000, "메모리 4슬롯 · 128GB까지 확장", "B650 ATX WiFi"],
+      ["메모리", "DDR5 64GB (32GB×2) 6000", 360000, "3ds Max 대형 씬, 다중 프로그램에 여유", "DDR5 64GB 6000 32GBx2"],
+      ["그래픽카드", "RTX 5060 Ti 16GB", 620000, "VRAM 16GB로 GPU 렌더 메모리 여유", "RTX 5060 Ti 16GB"],
+      ["SSD", "NVMe Gen4 2TB", 160000, "작업 파일·캐시용", "NVMe Gen4 2TB SSD"],
+      ["파워", "750W 80+ 골드", 100000, "이후 그래픽카드 업그레이드 대비", "750W 80PLUS 골드 파워"],
+      ["케이스", "공기 흐름 좋은 미들타워", 70000, "앞면 메쉬형 추천", "미들타워 메쉬 케이스"]
+    ]
+  },
+  game: {
+    note: "라이젠 7 7800X3D + RTX 5070 · QHD 고주사율 게임 프레임 최우선",
+    parts: [
+      ["CPU", "AMD 라이젠 7 7800X3D", 480000, "3D V-Cache로 게임 프레임 최상위", "라이젠7 7800X3D"],
+      ["쿨러", "듀얼타워 공랭 (PA120 급)", 40000, "X3D 발열에 충분", "써멀라이트 PA120"],
+      ["메인보드", "B650 ATX (Wi-Fi)", 160000, "AM5 · 이후 업그레이드 가능", "B650 ATX WiFi"],
+      ["메모리", "DDR5 32GB (16GB×2) 6000", 180000, "게임에 충분한 용량", "DDR5 32GB 6000 16GBx2"],
+      ["그래픽카드", "RTX 5070 12GB", 870000, "QHD 고주사율 게임용", "RTX 5070"],
+      ["SSD", "NVMe Gen4 1TB", 95000, "게임 몇 개면 이후 증설", "NVMe Gen4 1TB SSD"],
+      ["파워", "750W 80+ 골드", 100000, "5070에 여유 있는 용량", "750W 80PLUS 골드 파워"],
+      ["케이스", "공기 흐름 좋은 미들타워", 70000, "앞면 메쉬형 추천", "미들타워 메쉬 케이스"]
+    ]
+  }
+};
+const SHOPS = [
+  ["다나와", q => "https://search.danawa.com/dsearch.php?query=" + encodeURIComponent(q)],
+  ["쿠팡", q => "https://www.coupang.com/np/search?q=" + encodeURIComponent(q)],
+  ["11번가", q => "https://search.11st.co.kr/Search.tmall?kwd=" + encodeURIComponent(q)]
+];
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+};
+const won = n => n.toLocaleString("ko-KR") + "원";
+let cur = store.get("pc2m.preset", "balanced");
+if (!PRESETS[cur]) cur = "balanced";
+
+function priceKey(i){ return "pc2m.price." + cur + "." + i; }
+function doneKey(i){ return "pc2m.done." + cur + "." + i; }
+
+function render(){
+  document.querySelectorAll(".preset").forEach(b => b.setAttribute("aria-pressed", b.dataset.p === cur));
+  document.getElementById("presetNote").textContent = PRESETS[cur].note;
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  PRESETS[cur].parts.forEach((p, i) => {
+    const [cat, name, price, why, q] = p;
+    const el = document.createElement("div");
+    const done = store.get(doneKey(i), false);
+    el.className = "part" + (done ? " done" : "");
+    el.innerHTML = `
+      <input type="checkbox" aria-label="${name} 구매 완료" ${done ? "checked" : ""}>
+      <div><div class="cat">${cat}</div><div class="name">${name}</div><div class="why">${why}</div></div>
+      <label class="price"><input type="number" inputmode="numeric" step="1000" min="0" value="${store.get(priceKey(i), price)}" aria-label="${name} 가격"><span>원</span></label>
+      <div class="links">${SHOPS.map(([s, f]) => `<a href="${f(q)}" target="_blank" rel="noopener">${s}에서 찾기</a>`).join("")}</div>`;
+    el.querySelector("input[type=checkbox]").addEventListener("change", e => {
+      store.set(doneKey(i), e.target.checked); el.classList.toggle("done", e.target.checked);
+    });
+    el.querySelector("input[type=number]").addEventListener("input", e => {
+      store.set(priceKey(i), Math.max(0, parseInt(e.target.value || "0", 10))); updateTotal();
+    });
+    list.appendChild(el);
+  });
+  updateTotal();
+}
+function prices(){ return [...document.querySelectorAll(".part input[type=number]")].map(x => Math.max(0, parseInt(x.value || "0", 10))); }
+function updateTotal(){
+  const t = prices().reduce((a, b) => a + b, 0);
+  document.getElementById("total").textContent = won(t);
+  const d = BUDGET - t, diff = document.getElementById("diff");
+  diff.textContent = d >= 0 ? `예산 200만원 · ${won(d)} 남음` : `예산 200만원 · ${won(-d)} 초과`;
+  diff.className = "diff " + (d >= 0 ? "ok" : "over");
+  const m = document.getElementById("meter");
+  m.classList.toggle("over", d < 0);
+  m.firstElementChild.style.width = Math.min(100, t / BUDGET * 100) + "%";
+}
+document.querySelectorAll(".preset").forEach(b => b.addEventListener("click", () => { cur = b.dataset.p; store.set("pc2m.preset", cur); render(); }));
+document.getElementById("reset").addEventListener("click", () => {
+  PRESETS[cur].parts.forEach((p, i) => { try { localStorage.removeItem(priceKey(i)); } catch(e){} });
+  render(); toast("가격을 예상가로 되돌렸어요");
+});
+document.getElementById("copy").addEventListener("click", async () => {
+  const ps = prices();
+  const lines = PRESETS[cur].parts.map((p, i) => `${p[0]}\t${p[1]}\t${won(ps[i])}`);
+  const text = `[200만원 PC 견적 · ${document.querySelector('.preset[aria-pressed="true"]').textContent}]\n` + lines.join("\n") + `\n합계\t${document.getElementById("total").textContent}\n${location.href}`;
+  try { await navigator.clipboard.writeText(text); toast("견적을 복사했어요"); } catch(e){ toast("복사하지 못했어요"); }
+});
+function toast(msg){ const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1600); }
+// theme
+const root = document.documentElement;
+const savedTheme = store.get("pc2m.theme", null);
+if (savedTheme) root.dataset.theme = savedTheme;
+document.getElementById("theme").addEventListener("click", () => {
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark"; store.set("pc2m.theme", root.dataset.theme);
+});
+render();
+</script>
+</body>
+</html>
