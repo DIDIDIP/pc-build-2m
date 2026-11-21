@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>200만원 PC 견적</title>
-<meta name="description" content="3D 작업·게임용 200만원 PC 견적과 부품별 구매 링크">
+<title>150~200만원 PC 견적</title>
+<meta name="description" content="2026년 11월 오른 시세 기준 150~200만원 PC 견적과 부품별 구매 링크">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -78,16 +78,16 @@ h1{font-family:'IBM Plex Sans KR',sans-serif;font-size:30px;margin:0;letter-spac
 <div class="wrap">
   <header>
     <div>
-      <h1>200만원 PC 견적</h1>
-      <p class="sub">3D 작업(3ds Max·Blender)과 게임을 모두 쾌적하게 · 2026년 11월 기준 예상가</p>
+      <h1>150~200만원 PC 견적</h1>
+      <p class="sub">메모리·SSD·그래픽카드 가격이 오른 2026년 11월 다나와 시세 기준</p>
     </div>
     <button class="theme" id="theme" type="button">테마 전환</button>
   </header>
 
   <div class="presets" role="group" aria-label="구성 선택">
-    <button class="preset" data-p="balanced" type="button">균형 (추천)</button>
-    <button class="preset" data-p="three" type="button">3D 작업 위주</button>
-    <button class="preset" data-p="game" type="button">게임 위주</button>
+    <button class="preset" data-p="balanced" type="button">추천 · 약 188만</button>
+    <button class="preset" data-p="three" type="button">상급 · 약 197만</button>
+    <button class="preset" data-p="game" type="button">가성비 · 약 168만</button>
   </div>
   <p class="preset-note" id="presetNote"></p>
 
@@ -107,7 +107,7 @@ h1{font-family:'IBM Plex Sans KR',sans-serif;font-size:30px;margin:0;letter-spac
   </div>
 
   <div class="note">
-    <b>가격은 예상가예요.</b> 메모리·SSD는 최근 가격 변동이 커서 실제 가격과 다를 수 있어요. 각 부품의 <b>다나와</b> 버튼으로 최저가를 확인한 뒤 가격 칸을 고치면 합계가 바로 바뀝니다. 체크박스는 구매 완료 표시이며 이 브라우저에만 저장돼요.
+    <b>가격은 2026년 11월 20일 무렵 다나와 최저가 기준이에요.</b> 메모리(DDR5 32GB 약 75만 원), SSD(1TB 약 24만 원), 그래픽카드(RTX 5070 약 124만 원 이상)가 크게 올라, 이 예산에서는 메모리 16GB가 현실적인 선택이에요. 32GB는 가격이 내려가면 추가하세요. 각 부품의 <b>다나와</b> 버튼으로 최저가를 확인한 뒤 가격 칸을 고치면 합계가 바로 바뀝니다. 체크박스는 구매 완료 표시이며 이 브라우저에만 저장돼요.
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -116,42 +116,42 @@ h1{font-family:'IBM Plex Sans KR',sans-serif;font-size:30px;margin:0;letter-spac
 const BUDGET = 2000000;
 const PRESETS = {
   balanced: {
-    note: "RTX 5070 + 라이젠 7 · 3D 뷰포트, GPU 렌더, 게임 모두 가장 효율적인 구성",
+    note: "RTX 5060 Ti 16GB + 라이젠 5 7500F · VRAM 16GB로 3D 작업과 QHD 게임까지, 예산 대비 가장 균형 잡힌 구성",
     parts: [
-      ["CPU", "AMD 라이젠 7 9700X", 390000, "단일 코어가 강해 Max·Blender 뷰포트가 빠르고 8코어로 렌더도 충분", "라이젠7 9700X"],
-      ["쿨러", "듀얼타워 공랭 (PA120 급)", 40000, "조용하고 9700X에 넉넉한 냉각", "써멀라이트 PA120"],
-      ["메인보드", "B650 ATX (Wi-Fi)", 170000, "안정적인 AM5 보드, 이후 CPU 업그레이드 가능", "B650 ATX WiFi"],
-      ["메모리", "DDR5 32GB (16GB×2) 6000", 180000, "작업과 게임에 충분한 기본 용량", "DDR5 32GB 6000 16GBx2"],
-      ["그래픽카드", "RTX 5070 12GB", 870000, "이 가격대 3D·게임 성능 효율 최고", "RTX 5070"],
-      ["SSD", "NVMe Gen4 2TB", 160000, "120MB짜리 모델링 파일이 많아 2TB 권장", "NVMe Gen4 2TB SSD"],
-      ["파워", "750W 80+ 골드", 100000, "5070에 여유 있는 용량", "750W 80PLUS 골드 파워"],
-      ["케이스", "공기 흐름 좋은 미들타워", 70000, "앞면 메쉬형 추천", "미들타워 메쉬 케이스"]
+      ["CPU", "AMD 라이젠 5 7500F", 160000, "약 16만 · 6코어, 게임·작업 모두 충분 (쿨러 별도)", "라이젠5 7500F"],
+      ["쿨러", "싱글타워 공랭 (AK400 급)", 30000, "7500F는 쿨러 미포함", "딥쿨 AK400"],
+      ["메인보드", "B650M (MSI PRO B650M-B 급)", 110000, "약 11만 · 메모리 슬롯 여유, 이후 32GB 증설 가능", "B650M"],
+      ["메모리", "DDR5 16GB (8GB×2) 6000", 360000, "약 36만 · 32GB(약 75만)는 예산 초과라 16GB 듀얼채널", "DDR5 16GB 8GBx2 6000"],
+      ["그래픽카드", "RTX 5060 Ti 16GB", 860000, "약 86만 · VRAM 16GB, 이 예산의 최선", "RTX 5060 Ti 16GB"],
+      ["SSD", "NVMe 1TB", 240000, "약 24만 · 가격이 많이 올라 1TB로 시작", "NVMe 1TB SSD"],
+      ["파워", "650W 80+ 골드", 70000, "약 6~7만 · 5060 Ti에 충분", "650W 80PLUS 골드 파워"],
+      ["케이스", "공기 흐름 좋은 M-ATX 케이스", 50000, "앞면 메쉬형", "M-ATX 메쉬 케이스"]
     ]
   },
   three: {
-    note: "VRAM 16GB + 메모리 64GB · 무거운 씬, Arnold/Cycles GPU 렌더, 시뮬레이션에 유리",
+    note: "추천 구성에서 CPU만 라이젠 5 9600X로 · Max·Blender 뷰포트와 렌더가 조금 더 빠름",
     parts: [
-      ["CPU", "AMD 라이젠 7 9700X", 390000, "뷰포트와 렌더 모두 균형", "라이젠7 9700X"],
-      ["쿨러", "듀얼타워 공랭 (PA120 급)", 40000, "장시간 렌더에도 조용함", "써멀라이트 PA120"],
-      ["메인보드", "B650 ATX (Wi-Fi)", 170000, "메모리 4슬롯 · 128GB까지 확장", "B650 ATX WiFi"],
-      ["메모리", "DDR5 64GB (32GB×2) 6000", 360000, "3ds Max 대형 씬, 다중 프로그램에 여유", "DDR5 64GB 6000 32GBx2"],
-      ["그래픽카드", "RTX 5060 Ti 16GB", 620000, "VRAM 16GB로 GPU 렌더 메모리 여유", "RTX 5060 Ti 16GB"],
-      ["SSD", "NVMe Gen4 2TB", 160000, "작업 파일·캐시용", "NVMe Gen4 2TB SSD"],
-      ["파워", "750W 80+ 골드", 100000, "이후 그래픽카드 업그레이드 대비", "750W 80PLUS 골드 파워"],
-      ["케이스", "공기 흐름 좋은 미들타워", 70000, "앞면 메쉬형 추천", "미들타워 메쉬 케이스"]
+      ["CPU", "AMD 라이젠 5 9600X", 240000, "약 24만 · 단일 코어 성능이 높아 3D 프로그램 반응이 빠름", "라이젠5 9600X"],
+      ["쿨러", "싱글타워 공랭 (AK400 급)", 30000, "9600X도 별도 쿨러 권장", "딥쿨 AK400"],
+      ["메인보드", "B650M (MSI PRO B650M-B 급)", 110000, "약 11만 · 이후 32GB 증설 가능", "B650M"],
+      ["메모리", "DDR5 16GB (8GB×2) 6000", 360000, "약 36만 · 시세가 내리면 32GB로 교체", "DDR5 16GB 8GBx2 6000"],
+      ["그래픽카드", "RTX 5060 Ti 16GB", 860000, "약 86만 · VRAM 16GB", "RTX 5060 Ti 16GB"],
+      ["SSD", "NVMe 1TB", 240000, "약 24만", "NVMe 1TB SSD"],
+      ["파워", "650W 80+ 골드", 70000, "약 7만", "650W 80PLUS 골드 파워"],
+      ["케이스", "공기 흐름 좋은 M-ATX 케이스", 60000, "앞면 메쉬형", "M-ATX 메쉬 케이스"]
     ]
   },
   game: {
-    note: "라이젠 7 7800X3D + RTX 5070 · QHD 고주사율 게임 프레임 최우선",
+    note: "RTX 5060 8GB + 라이젠 5 7500F · FHD 게임과 가벼운 3D 작업용, 가장 저렴한 구성",
     parts: [
-      ["CPU", "AMD 라이젠 7 7800X3D", 480000, "3D V-Cache로 게임 프레임 최상위", "라이젠7 7800X3D"],
-      ["쿨러", "듀얼타워 공랭 (PA120 급)", 40000, "X3D 발열에 충분", "써멀라이트 PA120"],
-      ["메인보드", "B650 ATX (Wi-Fi)", 160000, "AM5 · 이후 업그레이드 가능", "B650 ATX WiFi"],
-      ["메모리", "DDR5 32GB (16GB×2) 6000", 180000, "게임에 충분한 용량", "DDR5 32GB 6000 16GBx2"],
-      ["그래픽카드", "RTX 5070 12GB", 870000, "QHD 고주사율 게임용", "RTX 5070"],
-      ["SSD", "NVMe Gen4 1TB", 95000, "게임 몇 개면 이후 증설", "NVMe Gen4 1TB SSD"],
-      ["파워", "750W 80+ 골드", 100000, "5070에 여유 있는 용량", "750W 80PLUS 골드 파워"],
-      ["케이스", "공기 흐름 좋은 미들타워", 70000, "앞면 메쉬형 추천", "미들타워 메쉬 케이스"]
+      ["CPU", "AMD 라이젠 5 7500F", 160000, "약 16만", "라이젠5 7500F"],
+      ["쿨러", "싱글타워 공랭 (AK400 급)", 30000, "7500F는 쿨러 미포함", "딥쿨 AK400"],
+      ["메인보드", "B650M (MSI PRO B650M-B 급)", 110000, "약 11만", "B650M"],
+      ["메모리", "DDR5 16GB (8GB×2) 6000", 360000, "약 36만", "DDR5 16GB 8GBx2 6000"],
+      ["그래픽카드", "RTX 5060 8GB", 660000, "약 66만 · FHD 게임 쾌적, VRAM 8GB라 무거운 3D 씬은 한계", "RTX 5060 8GB"],
+      ["SSD", "NVMe 1TB", 240000, "약 24만", "NVMe 1TB SSD"],
+      ["파워", "650W 80+ 골드", 65000, "약 6.5만", "650W 80PLUS 골드 파워"],
+      ["케이스", "공기 흐름 좋은 M-ATX 케이스", 50000, "앞면 메쉬형", "M-ATX 메쉬 케이스"]
     ]
   }
 };
@@ -165,11 +165,11 @@ const store = {
   set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
 };
 const won = n => n.toLocaleString("ko-KR") + "원";
-let cur = store.get("pc2m.preset", "balanced");
+let cur = store.get("pc2m26.preset", "balanced");
 if (!PRESETS[cur]) cur = "balanced";
 
-function priceKey(i){ return "pc2m.price." + cur + "." + i; }
-function doneKey(i){ return "pc2m.done." + cur + "." + i; }
+function priceKey(i){ return "pc2m26.price." + cur + "." + i; }
+function doneKey(i){ return "pc2m26.done." + cur + "." + i; }
 
 function render(){
   document.querySelectorAll(".preset").forEach(b => b.setAttribute("aria-pressed", b.dataset.p === cur));
@@ -207,7 +207,7 @@ function updateTotal(){
   m.classList.toggle("over", d < 0);
   m.firstElementChild.style.width = Math.min(100, t / BUDGET * 100) + "%";
 }
-document.querySelectorAll(".preset").forEach(b => b.addEventListener("click", () => { cur = b.dataset.p; store.set("pc2m.preset", cur); render(); }));
+document.querySelectorAll(".preset").forEach(b => b.addEventListener("click", () => { cur = b.dataset.p; store.set("pc2m26.preset", cur); render(); }));
 document.getElementById("reset").addEventListener("click", () => {
   PRESETS[cur].parts.forEach((p, i) => { try { localStorage.removeItem(priceKey(i)); } catch(e){} });
   render(); toast("가격을 예상가로 되돌렸어요");
@@ -215,17 +215,17 @@ document.getElementById("reset").addEventListener("click", () => {
 document.getElementById("copy").addEventListener("click", async () => {
   const ps = prices();
   const lines = PRESETS[cur].parts.map((p, i) => `${p[0]}\t${p[1]}\t${won(ps[i])}`);
-  const text = `[200만원 PC 견적 · ${document.querySelector('.preset[aria-pressed="true"]').textContent}]\n` + lines.join("\n") + `\n합계\t${document.getElementById("total").textContent}\n${location.href}`;
+  const text = `[150~200만원 PC 견적 · ${document.querySelector('.preset[aria-pressed="true"]').textContent}]\n` + lines.join("\n") + `\n합계\t${document.getElementById("total").textContent}\n${location.href}`;
   try { await navigator.clipboard.writeText(text); toast("견적을 복사했어요"); } catch(e){ toast("복사하지 못했어요"); }
 });
 function toast(msg){ const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1600); }
 // theme
 const root = document.documentElement;
-const savedTheme = store.get("pc2m.theme", null);
+const savedTheme = store.get("pc2m26.theme", null);
 if (savedTheme) root.dataset.theme = savedTheme;
 document.getElementById("theme").addEventListener("click", () => {
   const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-  root.dataset.theme = dark ? "light" : "dark"; store.set("pc2m.theme", root.dataset.theme);
+  root.dataset.theme = dark ? "light" : "dark"; store.set("pc2m26.theme", root.dataset.theme);
 });
 render();
 </script>
